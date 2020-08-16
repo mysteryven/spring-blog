@@ -10,11 +10,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -39,6 +41,7 @@ public class AuthController {
     public Object login(@RequestBody Map<String, Object> usernameAndPassword) {
         System.out.println(usernameAndPassword);
         String username = (String) usernameAndPassword.get("username");
+        String password = (String) usernameAndPassword.get("password");
         UserDetails realUser;
 
         try {
@@ -51,7 +54,7 @@ public class AuthController {
         }
 
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(realUser, usernameAndPassword, Collections.emptyList());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
 
         try {
             Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
