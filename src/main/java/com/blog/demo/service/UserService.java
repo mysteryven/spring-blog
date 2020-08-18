@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,6 +25,10 @@ public class UserService implements UserDetailsService {
 
     public void save(String username, String password) {
         usersMap.put(username, this.bCryptPasswordEncoder.encode(password));
+    }
+
+    public com.blog.demo.entity.User getUserByUserName(String username) {
+        return new com.blog.demo.entity.User(1, "x", "wang");
     }
 
     @Override

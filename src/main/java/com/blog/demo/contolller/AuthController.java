@@ -33,7 +33,15 @@ public class AuthController {
     @GetMapping("/auth")
     @ResponseBody
     public Object auth() {
-        return new Result("ok", true);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return new Result("fail", "没有登录", false);
+        } else {
+            String username = authentication.getName();
+            User user = userService.getUserByUserName(username);
+            return new Result("ok", "登录成功", true, user);
+        }
+
     }
 
     @PostMapping("/auth/login")
@@ -52,7 +60,6 @@ public class AuthController {
         } catch (UsernameNotFoundException e) {
             return new Result("fail", "用户不存在", false);
         }
-
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
 
