@@ -36,20 +36,36 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
             return new Result("fail", "没有登录", false);
-        } else {
-            String username = authentication.getName();
+        } else { String username = authentication.getName();
             User user = userService.getUserByUserName(username);
             return new Result("ok", "登录成功", true, user);
         }
+    }
 
+
+    @PostMapping("auth/register")
+    @ResponseBody
+    public Object register(@RequestBody Map<String, String> usernameAndPassword) {
+        String username = usernameAndPassword.get("username");
+        String password = usernameAndPassword.get("password");
+        User userByUserName = userService.getUserByUserName(username);
+
+        if (userByUserName != null) {
+            return new Result("fail", "用户已存在", false);
+        } else {
+            userService.save(username, password);
+            login(usernameAndPassword);
+        }
+
+        return new Result("ok", "注册成功", true);
     }
 
     @PostMapping("/auth/login")
     @ResponseBody
-    public Object login(@RequestBody Map<String, Object> usernameAndPassword) {
+    public Object login(@RequestBody Map<String, String> usernameAndPassword) {
         System.out.println(usernameAndPassword);
-        String username = (String) usernameAndPassword.get("username");
-        String password = (String) usernameAndPassword.get("password");
+        String username = usernameAndPassword.get("username");
+        String password = usernameAndPassword.get("password");
         UserDetails realUser;
 
         try {
@@ -72,6 +88,14 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             return new Result("fail", "密码不正确", false);
         }
+    }
+
+    @PostMapping("/auth/logout")
+    @ResponseBody
+    public Object logout() {
+        SecurityContextHolder.clearContext();
+
+        return new Result("ok", "已登出", false);
     }
 
     private static class Result {
