@@ -1,5 +1,6 @@
 package com.blog.demo.service;
 
+import com.blog.demo.dao.UserMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,10 @@ public class UserService implements UserDetailsService {
     private final Map<String, String> usersMap = new ConcurrentHashMap<>();
 
     @Inject
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder) {
+    private UserMapper userMapper;
+
+    @Inject
+    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder ) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.save("wang", "1");
     }
@@ -28,6 +32,8 @@ public class UserService implements UserDetailsService {
     }
 
     public com.blog.demo.entity.User getUserByUserName(String username) {
+        Object obj = userMapper.findUserByUsername(username);
+        System.out.println(obj);
         return new com.blog.demo.entity.User(1, "x", "wang");
     }
 
