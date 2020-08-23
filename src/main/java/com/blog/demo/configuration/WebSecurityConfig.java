@@ -18,6 +18,7 @@ import javax.inject.Named;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Named("userService")
     @Inject
     private UserDetailsService userDetailsService;
 

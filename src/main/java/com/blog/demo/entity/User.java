@@ -1,16 +1,29 @@
 package com.blog.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
     private Integer id;
-    private String avatar;
     private String username;
+    @JsonIgnore
+    private String password;
     private String updatedAt;
     private String createdAt;
 
-    public User(Integer id, String avatar, String username) {
+    public User(Integer id, String username, String password, String createdAt, String updatedAt) {
         this.id = id;
-        this.avatar = avatar;
         this.username = username;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getId() {
@@ -19,14 +32,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getUsername() {
