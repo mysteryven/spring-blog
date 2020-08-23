@@ -57,7 +57,6 @@ public class UserServiceTest {
     @Test
     public void returnRightUserDetails() {
         String username = "fake";
-        String password = "fake";
         String encodedPassword = "mystery";
         when(mockUserMapper.findUserByUsername(username)).thenReturn(new User(1, username, encodedPassword));
 

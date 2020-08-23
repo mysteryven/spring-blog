@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -21,7 +18,7 @@ public class UserService implements UserDetailsService {
 
 
     @Inject
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper ) {
+    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userMapper = userMapper;
     }
@@ -31,7 +28,7 @@ public class UserService implements UserDetailsService {
     }
 
     public com.blog.demo.entity.User getUserByUserName(String username) {
-        return  userMapper.findUserByUsername(username);
+        return userMapper.findUserByUsername(username);
     }
 
     @Override

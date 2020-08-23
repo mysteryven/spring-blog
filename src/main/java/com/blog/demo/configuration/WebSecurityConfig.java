@@ -1,6 +1,5 @@
 package com.blog.demo.configuration;
 
-import com.blog.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
