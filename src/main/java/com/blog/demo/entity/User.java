@@ -10,6 +10,12 @@ public class User {
     private String updatedAt;
     private String createdAt;
 
+    public User(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public User(Integer id, String username, String password, String createdAt, String updatedAt) {
         this.id = id;
         this.username = username;
