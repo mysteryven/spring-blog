@@ -35,7 +35,7 @@ public class AuthController {
     public Object auth() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
-            return new Result("fail", "没有登录", false);
+            return new Result("fail", "没有登录1", false);
         } else {
             String username = authentication.getName();
             User user = userService.getUserByUserName(username);
@@ -69,10 +69,10 @@ public class AuthController {
     public Object login(@RequestBody Map<String, String> usernameAndPassword) {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
-        UserDetails realUser;
+        User realUser;
 
         try {
-            realUser = userService.loadUserByUsername(username);
+            realUser = userService.getUserByUserName(username);
             if (realUser == null) {
                 return new Result("fail", "用户不存在", false);
             }
