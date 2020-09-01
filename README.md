@@ -7,6 +7,7 @@
 1. 安装 Docker
 2. 配置 Java 环境（Java，Maven）
 3. 配置 Node 环境（Node）
+4. 开发工具（IDEA）
 
 ## 启动 
 
@@ -15,3 +16,7 @@
 ```bash
     docker run --name my-sql -d -e MYSQL_ROOT_PASSWORD=my-secret--pw--pw -p 3306:3306 -v /Users/wenzhe/java-repos/demo1/target/mysql:/var/lib/mysql mysql
 ```
+
+### 运行后端
+
+### 运行前端
