@@ -18,6 +18,6 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <mappers>
-<!--        <mapper resource="db/mybatis/userMapper.xml"/>-->
+        <mapper resource="db/mybatis/blogMapper.xml"/>
     </mappers>
 </configuration>
