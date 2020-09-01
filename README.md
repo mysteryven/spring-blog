@@ -14,7 +14,7 @@
 ### 启动数据库
 
 ```bash
-    docker run --name my-sql -d -e MYSQL_ROOT_PASSWORD=my-secret--pw--pw -p 3306:3306 -v /Users/wenzhe/java-repos/demo1/target/mysql:/var/lib/mysql mysql
+docker run --name my-sql -d -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -v /Users/wenzhe/java-repos/demo1/target/mysql:/var/lib/mysql mysql
 ```
 
 ### 运行后端

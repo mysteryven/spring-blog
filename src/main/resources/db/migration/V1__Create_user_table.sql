@@ -1,4 +1,4 @@
-create table USER
+create table user
 (
     id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username    VARCHAR(20),

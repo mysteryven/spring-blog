@@ -1,4 +1,4 @@
-create table BLOG
+create table blog
 (
     id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(100),

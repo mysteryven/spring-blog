@@ -5,10 +5,23 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-@Mapper
-public interface BlogDao {
-    User findUserByUsername(@Param("username") String username);
+import javax.inject.Inject;
+
+@Service
+public class BlogDao {
+    private final SqlSession sqlSession;
+
+    @Inject
+    public BlogDao(SqlSession sqlSession) {
+        this.sqlSession = sqlSession;
+    }
+
+    public void getBlogs() {
+        System.out.println(sqlSession.selectList("selectBlog"));
+    }
+
 }
