@@ -21,7 +21,7 @@ public class BlogDao {
     }
 
     public void getBlogs() {
-        System.out.println(sqlSession.selectList("selectBlog"));
+//        System.out.println(sqlSession.selectList("selectBlog"));
     }
 
 }
