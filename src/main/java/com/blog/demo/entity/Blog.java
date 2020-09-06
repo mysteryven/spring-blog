@@ -1,24 +1,25 @@
 package com.blog.demo.entity;
 
-import java.time.Instant;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Blog {
     private int id;
-    private int userId;
     private String title;
     private String url;
     private String content;
-    private Instant createdAt;
-    private Instant modifiedAt;
+    private String description;
+    private String type;
+    private Timestamp createdAt;
+    private String modifiedAt;
+    private User user;
 
-    public Blog(int id, int userId, String title, String url, String content, Instant createdAt, Instant modifiedAt) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.url = url;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -27,14 +28,6 @@ public class Blog {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getTitle() {
@@ -61,19 +54,39 @@ public class Blog {
         this.content = content;
     }
 
-    public Instant getCreatedAt() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getModifiedAt() {
+    public String getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(Instant modifiedAt) {
+    public void setModifiedAt(String modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getUserId() {
+        return user == null ? null : user.getId();
     }
 }

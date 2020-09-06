@@ -2,13 +2,19 @@ package com.blog.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
+
 public class User {
     private Integer id;
     private String username;
     @JsonIgnore
     private String password;
-    private String updatedAt;
+    private String modifiedAt;
     private String createdAt;
+
+
 
     public User(Integer id, String username, String password) {
         this.id = id;
@@ -16,20 +22,12 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String username, String password, String createdAt, String updatedAt) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public String getModifiedAt() {
+        return modifiedAt;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setModifiedAt(String modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Integer getId() {
@@ -48,12 +46,12 @@ public class User {
         this.username = username;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCreatedAt() {

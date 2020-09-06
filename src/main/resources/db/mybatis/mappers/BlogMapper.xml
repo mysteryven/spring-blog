@@ -2,8 +2,46 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blog.demo">
-    <select id="selectBlog" resultType="com.blog.demo.entity.Blog">
-        select * FROM blog
+<mapper namespace="org.mybatis.example.BlogMapper">
+    <select id="selectBlog" resultMap="blog">
+        SELECT
+        blog.id as blog_id,
+        blog.title as blog_title,
+        blog.url as blog_url,
+        blog.content as blog_content,
+        blog.description as blog_description,
+        blog.type as blog_type,
+        blog.created_at as blog_created_at,
+        blog.modified_at as blog_modified_at,
+        user.username as user_username,
+        user.id as user_id
+        FROM blog
+        LEFT OUTER JOIN user
+        ON blog.user_id = user.id
+        <if test="user_id != null">
+            WHERE blog.user_id = #{user_id}
+        </if>
+        order by blog.modified_at desc
+        LIMIT ${offset}, #{limit}
     </select>
+    <insert id="insertBlog" parameterType="com.blog.demo.entity.Blog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO blog (title, content, description, type, url, user_id)
+        VALUES (#{title}, #{content}, #{description}, #{type}, #{url}, #{userId})
+    </insert>
+
+    <resultMap id="blog" type="com.blog.demo.entity.Blog">
+        <id property="id" column="blog_id"/>
+        <result property="title" column="blog_title"/>
+        <result property="content" column="blog_content"/>
+        <result property="url" column="blog_url" />
+        <result property="description" column="blog_description" />
+        <result property="modifiedAt" column="blog_modified_at"/>
+        <result property="createdAt" column="blog_created_at"/>
+        <association property="user" javaType="com.blog.demo.entity.User">
+            <id property="id" column="user_id"/>
+            <result property="username" column="user_username"/>
+            <result property="modifiedAt" column="user_modified_at"/>
+            <result property="createdAt" column="user_created_at"/>
+        </association>
+    </resultMap>
 </mapper>

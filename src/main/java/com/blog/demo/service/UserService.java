@@ -1,6 +1,8 @@
 package com.blog.demo.service;
 
 import com.blog.demo.dao.UserMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +31,11 @@ public class UserService implements UserDetailsService {
 
     public com.blog.demo.entity.User getUserByUserName(String username) {
         return userMapper.findUserByUsername(username);
+    }
+
+    public com.blog.demo.entity.User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return this.getUserByUserName(authentication == null ? null : authentication.getName());
     }
 
     @Override
