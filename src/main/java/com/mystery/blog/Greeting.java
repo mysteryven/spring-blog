@@ -1,4 +1,4 @@
-package com.blog.demo;
+package com.mystery.blog;
 
 public class Greeting {
     private long id;

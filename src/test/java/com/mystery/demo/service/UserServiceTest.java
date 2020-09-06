@@ -1,7 +1,8 @@
-package com.blog.demo.service;
+package com.mystery.demo.service;
 
-import com.blog.demo.dao.UserMapper;
-import com.blog.demo.entity.User;
+import com.mystery.blog.dao.UserMapper;
+import com.mystery.blog.entity.User;
+import com.mystery.blog.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import sun.jvm.hotspot.utilities.Assert;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

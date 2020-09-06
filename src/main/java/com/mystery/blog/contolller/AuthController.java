@@ -1,8 +1,8 @@
-package com.blog.demo.contolller;
+package com.mystery.blog.contolller;
 
-import com.blog.demo.entity.Result;
-import com.blog.demo.entity.User;
-import com.blog.demo.service.UserService;
+import com.mystery.blog.entity.Result;
+import com.mystery.blog.entity.User;
+import com.mystery.blog.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

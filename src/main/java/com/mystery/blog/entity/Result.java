@@ -1,4 +1,4 @@
-package com.blog.demo.entity;
+package com.mystery.blog.entity;
 
 public class Result {
     private String status;

@@ -1,16 +1,13 @@
-package com.blog.demo.contolller;
+package com.mystery.blog.contolller;
 
-import com.blog.demo.dao.BlogDao;
-import com.blog.demo.entity.Blog;
-import com.blog.demo.entity.User;
-import com.blog.demo.service.BlogService;
-import com.blog.demo.service.UserService;
+import com.mystery.blog.service.BlogService;
+import com.mystery.blog.service.UserService;
+import com.mystery.blog.entity.Blog;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class BlogController {

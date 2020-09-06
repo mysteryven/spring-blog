@@ -1,7 +1,6 @@
-package com.blog.demo.entity;
+package com.mystery.blog.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Blog {
     private int id;

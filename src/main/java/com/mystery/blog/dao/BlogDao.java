@@ -1,6 +1,6 @@
-package com.blog.demo.dao;
+package com.mystery.blog.dao;
 
-import com.blog.demo.entity.Blog;
+import com.mystery.blog.entity.Blog;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 

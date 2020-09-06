@@ -1,7 +1,8 @@
-package com.blog.demo.contolller;
+package com.mystery.demo.contolller;
 
-import com.blog.demo.entity.User;
-import com.blog.demo.service.UserService;
+import com.mystery.blog.contolller.AuthController;
+import com.mystery.blog.entity.User;
+import com.mystery.blog.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

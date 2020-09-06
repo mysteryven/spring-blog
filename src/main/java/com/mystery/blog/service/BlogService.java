@@ -1,11 +1,10 @@
-package com.blog.demo.service;
+package com.mystery.blog.service;
 
-import com.blog.demo.dao.BlogDao;
-import com.blog.demo.entity.Blog;
+import com.mystery.blog.dao.BlogDao;
+import com.mystery.blog.entity.Blog;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.HashMap;
 import java.util.List;
 
 @Service

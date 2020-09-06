@@ -1,6 +1,6 @@
-package com.blog.demo.service;
+package com.mystery.blog.service;
 
-import com.blog.demo.dao.UserMapper;
+import com.mystery.blog.dao.UserMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -29,18 +29,18 @@ public class UserService implements UserDetailsService {
         userMapper.saveUser(username, bCryptPasswordEncoder.encode(password));
     }
 
-    public com.blog.demo.entity.User getUserByUserName(String username) {
+    public com.mystery.blog.entity.User getUserByUserName(String username) {
         return userMapper.findUserByUsername(username);
     }
 
-    public com.blog.demo.entity.User getCurrentUser() {
+    public com.mystery.blog.entity.User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return this.getUserByUserName(authentication == null ? null : authentication.getName());
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.blog.demo.entity.User user = getUserByUserName(username);
+        com.mystery.blog.entity.User user = getUserByUserName(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("不存在此用户");

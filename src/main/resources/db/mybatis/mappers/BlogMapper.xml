@@ -24,12 +24,12 @@
         order by blog.modified_at desc
         LIMIT ${offset}, #{limit}
     </select>
-    <insert id="insertBlog" parameterType="com.blog.demo.entity.Blog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insertBlog" parameterType="com.mystery.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO blog (title, content, description, type, url, user_id)
         VALUES (#{title}, #{content}, #{description}, #{type}, #{url}, #{userId})
     </insert>
 
-    <resultMap id="blog" type="com.blog.demo.entity.Blog">
+    <resultMap id="blog" type="com.mystery.blog.entity.Blog">
         <id property="id" column="blog_id"/>
         <result property="title" column="blog_title"/>
         <result property="content" column="blog_content"/>
@@ -37,7 +37,7 @@
         <result property="description" column="blog_description" />
         <result property="modifiedAt" column="blog_modified_at"/>
         <result property="createdAt" column="blog_created_at"/>
-        <association property="user" javaType="com.blog.demo.entity.User">
+        <association property="user" javaType="com.mystery.blog.entity.User">
             <id property="id" column="user_id"/>
             <result property="username" column="user_username"/>
             <result property="modifiedAt" column="user_modified_at"/>

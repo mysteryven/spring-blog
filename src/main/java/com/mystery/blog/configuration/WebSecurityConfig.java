@@ -1,4 +1,4 @@
-package com.blog.demo.configuration;
+package com.mystery.blog.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

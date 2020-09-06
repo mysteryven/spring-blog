@@ -1,10 +1,6 @@
-package com.blog.demo.entity;
+package com.mystery.blog.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Date;
 
 public class User {
     private Integer id;

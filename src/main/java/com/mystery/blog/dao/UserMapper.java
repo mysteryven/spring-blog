@@ -1,6 +1,6 @@
-package com.blog.demo.dao;
+package com.mystery.blog.dao;
 
-import com.blog.demo.entity.User;
+import com.mystery.blog.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
