@@ -39,4 +39,8 @@ public class BlogDao {
     public void insertBlog(Blog blog) {
         sqlSession.insert("insertBlog", blog);
     }
+
+    public void updateBlog(Blog blog) {
+        sqlSession.update("updateBlog", blog);
+    }
 }

@@ -20,7 +20,11 @@ public class BlogService {
        return blogDao.getBlogs(pageNo, pageSize, userId);
     }
 
-    public void insertBlog(Blog blog) {
+    public void insertBlog( Blog blog) {
         blogDao.insertBlog(blog);
+    }
+
+    public void updateBlog(String id, Blog blog) {
+        blogDao.updateBlog(blog);
     }
 }

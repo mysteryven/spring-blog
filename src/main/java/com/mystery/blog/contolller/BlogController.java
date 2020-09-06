@@ -37,6 +37,14 @@ public class BlogController {
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {
 
+        Blog blog = generatorBlog(map);
+
+        blogService.insertBlog(blog);
+
+        return "hi";
+    }
+
+    private Blog generatorBlog(HashMap<String, String> map) {
         Blog blog = new Blog();
         blog.setTitle(map.get("title"));
         blog.setContent(map.get("content"));
@@ -44,9 +52,14 @@ public class BlogController {
         blog.setType(map.getOrDefault("type", "1"));
         blog.setUrl(map.get("url"));
         blog.setUser(userService.getCurrentUser());
+        return blog;
+    }
 
-        blogService.insertBlog(blog);
+    public Object updateBlog(@RequestBody HashMap<String, String> map) {
+        Blog blog = generatorBlog(map);
 
-        return "hi";
+        blogService.updateBlog(map.get("id"), blog);
+
+        return "edit";
     }
 }
