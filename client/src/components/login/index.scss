@@ -1,0 +1,11 @@
+.pins-login {
+  display: inline-flex;
+
+  .register, .login {
+    color: #e6e7e7;
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+}
