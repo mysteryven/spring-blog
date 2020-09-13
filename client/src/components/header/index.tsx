@@ -7,6 +7,7 @@ import {auth} from "../../server/api";
 
 const Header = () => {
   const [loginStatus, setLoginStatus] = useState<boolean>();
+  const [username, setUsername] = useState<string>();
 
 
   useEffect( () => {
@@ -15,14 +16,17 @@ const Header = () => {
 
   function updateLoginStatus() {
     getRequest(auth).then(res => {
+
       setLoginStatus(res.data.login);
+      setUsername("hihihi")
+      res.data.data && setUsername(res.data.data.username)
     })
   }
 
   return (
     <div className="pins-header">
       <Login loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} />
-      <User loginStatus={loginStatus} />
+      <User loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} username={username} />
     </div>
   )
 }

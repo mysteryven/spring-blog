@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.Map;
 
@@ -66,7 +67,8 @@ public class AuthController {
     @CrossOrigin("*")
     @PostMapping("/auth/login")
     @ResponseBody
-    public Object login(@RequestBody Map<String, String> usernameAndPassword) {
+    public Object login(
+            @RequestBody Map<String, String> usernameAndPassword) {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
         User realUser;

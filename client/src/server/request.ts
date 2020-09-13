@@ -6,6 +6,6 @@ export const getRequest = async (url: string) => {
   return axios.get(baseUrl + url);
 }
 
-export const postRequest = async (url: string, params: object) => {
+export const postRequest = async (url: string, params?: object) => {
   return axios.post(baseUrl + url, params);
 }

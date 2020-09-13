@@ -1,37 +1,60 @@
 import React, {useState} from "react";
-import {Avatar, Popover} from "antd";
+import {Avatar, Modal, Popover} from "antd";
 import './index.scss';
+import {getRandomInt, handleResult, successNotification} from "../../utils";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {getRequest, postRequest} from "../../server/request";
+import {logout, register} from "../../server/api";
 
 interface UserProps {
-  loginStatus?: boolean
+  loginStatus?: boolean;
+  username?: string;
+  updateLoginStatus: (statue: boolean) => void
 }
 
 const User: React.FC<UserProps> = (props) => {
+  const {username} = props;
+
+  function handleLogout() {
+    Modal.confirm({
+      title: 'Confirm',
+      icon: <ExclamationCircleOutlined />,
+      content: '确认要登出吗？',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: () => {
+        postRequest(logout).then(res => {
+          handleResult(res, () => {
+            successNotification("登出成功");
+            props.updateLoginStatus(false);
+          })
+        });
+      }
+    });
+  }
 
   const PopContent = (
     <div className="profile-list">
-      <div className="profile-item">登出</div>
+      <div className="profile-item" onClick={handleLogout}>登出</div>
     </div>
   );
 
-  const UserList = ['U', '', 'Tom', 'Edward'];
   const ColorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
 
-  const [user, setUser] = useState(UserList[1]);
-  const [color, setColor] = useState(ColorList[1]);
+  const [color] = useState(ColorList[getRandomInt(3)]);
 
   return (
     <div>
-      {props.loginStatus && (
+      {!props.loginStatus && (
         <div>
-          <Popover placement="bottomLeft" title={user} content={PopContent}>
+          <Popover placement="bottomLeft" title={username} content={PopContent}>
             <Avatar
               style={{backgroundColor: color, verticalAlign: 'middle'}}
               size={48}
               shape={"circle"}
               gap={4}
             >
-              {user}
+              {username}
             </Avatar>
           </Popover>
 

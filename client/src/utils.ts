@@ -20,13 +20,16 @@ export interface Res {
   status: 'fail' | 'ok'
 }
 
+export function getRandomInt(max: number) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
 type Callback = (msg: string) => void
 
-export function handleResult(res: AxiosResponse<Res>, success : Callback, fail: Callback) {
+export function handleResult(res: AxiosResponse<Res>, success : Callback, fail?: Callback) {
   if (res.data.status === 'ok') {
     success(res.data.msg)
   } else if (res.data.status === 'fail') {
-    fail(res.data.msg)
+    fail && fail(res.data.msg)
   }
 }
