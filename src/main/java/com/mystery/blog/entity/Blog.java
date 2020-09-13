@@ -9,7 +9,7 @@ public class Blog {
     private String content;
     private String description;
     private String type;
-    private Timestamp createdAt;
+    private String createdAt;
     private String modifiedAt;
     private User user;
 
@@ -61,11 +61,11 @@ public class Blog {
         this.description = description;
     }
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -1,17 +1,26 @@
-import React from 'react';
-import './index.less';
-import {HeartTwoTone, MessageTwoTone} from "@ant-design/icons/lib";
-import {Pagination} from "antd";
-import {APin} from "../pins";
+import React from "react"
+import "./index.less"
+import {APin} from "../pins"
 
 interface PinProps {
   pin: APin
 }
 
 const Pin: React.FC<PinProps> = (props) => {
-  const {title, url, description, user} = props.pin;
+  const {title, url, description, user, createdAt} = props.pin
   const style = {
     fontSize: 20
+  }
+
+  function formatTime(createAt: string) {
+    console.log(createAt)
+    const date = new Date(createAt)
+    console.log(date)
+    return date.getFullYear() + "-" +
+      (date.getMonth() + 1) + "-" +
+      date.getDate() + " " +
+      date.getHours() + ":" +
+      date.getMinutes()
   }
 
   return (
@@ -21,11 +30,11 @@ const Pin: React.FC<PinProps> = (props) => {
           {title}
         </a>
         <div className="instruction">
-          {user.username}投稿
+          {user.username}投稿[{formatTime(createdAt)}]
         </div>
       </div>
       <div className="recommended-language">
-        {description || '这个人懒死了，没有写推荐语'}
+        {description || "他有点懒，没有写推荐语"}
       </div>
       {/*<div className="infos">*/}
       {/*  <div className={'info'}>*/}
@@ -41,4 +50,4 @@ const Pin: React.FC<PinProps> = (props) => {
   )
 }
 
-export default Pin;
+export default Pin

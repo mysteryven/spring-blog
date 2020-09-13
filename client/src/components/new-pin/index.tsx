@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Button, Form, Input, Modal} from "antd";
-import {layout, tailLayout} from "../login";
-import {getRequest, postRequest} from "../../server/request";
-import {blog} from "../../server/api";
-import {successNotification} from "../../utils";
+import React, {useState} from "react"
+import {Button, Form, Input, Modal} from "antd"
+import {layout, tailLayout} from "../login"
+import {postRequest} from "../../server/request"
+import {blog} from "../../server/api"
+import {successNotification} from "../../utils"
 
 interface Values {
   title: string;
@@ -12,7 +12,7 @@ interface Values {
 }
 
 const NewPin = () => {
-  const [visible, setVisible] = useState<boolean>();
+  const [visible, setVisible] = useState<boolean>()
 
   function handleOk() {
     setVisible(true)
@@ -27,9 +27,9 @@ const NewPin = () => {
       ...values,
       type: 1
     }).then((res) => {
-      successNotification("新增成功");
-      handleCancel();
-    });
+      successNotification("新增成功")
+      handleCancel()
+    })
   }
 
   return (
@@ -50,16 +50,16 @@ const NewPin = () => {
           <Form.Item
             label="标题"
             name="title"
-            rules={[{required: true, message: '亲亲，要写稿件标题哦！'}]}
+            rules={[{required: true}]}
           >
             <Input/>
           </Form.Item>
           <Form.Item
             label="链接地址"
             name="url"
-            rules={[{required: true, message: '亲亲，要写稿件地址哦！'}]}
+            rules={[{required: true}]}
           >
-            <Input/>
+            <Input allowClear prefix={"https://"}/>
           </Form.Item>
 
           <Form.Item
@@ -76,7 +76,7 @@ const NewPin = () => {
         </Form>
       </Modal>
     </div>
-  );
+  )
 }
 
-export default NewPin;
+export default NewPin

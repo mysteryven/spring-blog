@@ -11,10 +11,10 @@ module.exports = {
                             '@primary-color': '#fb7299',
                             '@success-color': '#fb7299'
                         },
-                        javascriptEnabled: true,
-                    },
-                },
-            },
-        },
-    ],
+                        javascriptEnabled: true
+                    }
+                }
+            }
+        }
+    ]
 };

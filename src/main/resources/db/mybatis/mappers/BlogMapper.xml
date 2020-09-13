@@ -21,7 +21,7 @@
         <if test="user_id != null">
             WHERE blog.user_id = #{user_id}
         </if>
-        order by blog.modified_at desc
+        order by blog.created_at desc
         LIMIT ${offset}, #{limit}
     </select>
     <insert id="insertBlog" parameterType="com.mystery.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id"

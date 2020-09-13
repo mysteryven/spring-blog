@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
-import Pins from './components/pins'
-import 'antd/dist/antd.less';
-import './App.less';
-import Header from "./components/header";
-import {getRequest} from "./server/request";
+import React from "react"
+import Pins from "./components/pins"
+import "antd/dist/antd.less"
+import "./App.less"
+import Header from "./components/header"
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
       <Header/>
       <Pins/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

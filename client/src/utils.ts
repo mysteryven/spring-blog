@@ -1,23 +1,23 @@
-import {notification} from "antd";
-import {AxiosResponse} from "axios";
+import {notification} from "antd"
+import {AxiosResponse} from "axios"
 
-export const successNotification = ( description: string, message?: string) => notification['success']({
-  message:  message || '成功',
+export const successNotification = (description: string, message?: string) => notification["success"]({
+  message: message || "成功",
   description:
-    description || '',
-});
+    description || ""
+})
 
-export const failNotification = ( description: string, message?: string) => notification['error']({
-  message:  message || '失败',
+export const failNotification = (description: string, message?: string) => notification["error"]({
+  message: message || "失败",
   description:
-    description || '',
-});
+    description || ""
+})
 
 
 export interface Res {
   msg: string;
   data: object;
-  status: 'fail' | 'ok'
+  status: "fail" | "ok"
 }
 
 interface PrimaryTypeObject {
@@ -25,26 +25,26 @@ interface PrimaryTypeObject {
 }
 
 export function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max))
 }
 
 type Callback = (msg: string) => void
 
-export function handleResult(res: AxiosResponse<Res>, success : Callback, fail?: Callback) {
-  if (res.data.status === 'ok') {
+export function handleResult(res: AxiosResponse<Res>, success: Callback, fail?: Callback) {
+  if (res.data.status === "ok") {
     success(res.data.msg)
-  } else if (res.data.status === 'fail') {
+  } else if (res.data.status === "fail") {
     fail && fail(res.data.msg)
   }
 }
 
-export  function beQueryString(obj: PrimaryTypeObject, prefix: string = '?'): string {
+export function beQueryString(obj: PrimaryTypeObject, prefix: string = "?"): string {
   return Object.keys(obj).reduce((prev, cur, index) => {
-    let connector = '';
+    let connector = ""
     if (index !== 0) {
-      connector = '&';
+      connector = "&"
     }
-    return `${prev}${connector}${cur}=${obj[cur]}`;
+    return `${prev}${connector}${cur}=${obj[cur]}`
   }, prefix)
 }
 
