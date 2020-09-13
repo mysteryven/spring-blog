@@ -20,6 +20,7 @@ public class BlogController {
         this.userService = userService;
     }
 
+    @CrossOrigin("*")
     @GetMapping("/blog")
     @ResponseBody
     public Object blog(
@@ -33,6 +34,7 @@ public class BlogController {
         return blogService.getBlogs(pageNo, pageSize, userId);
     }
 
+    @CrossOrigin("*")
     @PostMapping("blog")
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {

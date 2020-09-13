@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import {Button, Form, Input, Modal, notification} from 'antd';
 import './index.scss'
+import {postRequest} from "../../server/request";
+import {login, register} from "../../server/api";
+import {failNotification, handleResult, Res, successNotification} from "../../utils";
+import {AxiosResponse} from "axios";
 
 export const layout = {
   labelCol: {span: 8},
@@ -10,35 +14,61 @@ export const tailLayout = {
   wrapperCol: {offset: 8, span: 16},
 };
 
+interface LoginValues {
+  username: string;
+  password: string;
+}
+
 
 const Login: React.FC = () => {
-  const [visible, setVisible] = useState();
-
-  function handleOk() {
-    setVisible(true)
-  }
+  const [visible, setVisible] = useState<boolean>();
+  const [type, setType] = useState<'login' | 'register'>();
 
   function handleCancel() {
     setVisible(false)
   }
 
-  function onFinish() {
-    notification['success']({
-      message: '登录成功',
-      description:
-        ' 恭喜你，已经登录成功了',
-    });
+  function computeStatusText() {
+    return type === 'login' ? '登录' : '注册'
+  }
+
+  async function onFinish(values: LoginValues) {
+    console.log(values);
+    const text = computeStatusText();
+    const api = type === 'login' ? login : register
+
+    try {
+      const res: AxiosResponse<Res> = await postRequest(api, values);
+      handleResult(res, () => {
+        successNotification( text + "成功")
+        setVisible(false)
+      }, (msg) => {
+        failNotification(msg)
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function handleLogin() {
+    setType("login");
+    setVisible(true);
+  }
+
+
+  function handleRegister() {
+    setType("register");
+    setVisible(true);
   }
 
   return (
     <div className={"pins-login"}>
-      <div className={"login"} onClick={handleOk}>登录</div>
-      <div className={"register"} onClick={handleOk}>注册</div>
+      <div className={"login"} onClick={handleLogin}>登录</div>
+      <div className={"register"} onClick={handleRegister}>注册</div>
       <Modal
-        title="登录"
+        title={computeStatusText()}
         footer={null}
         visible={visible}
-        onOk={handleOk}
         onCancel={handleCancel}
       >
         <Form
@@ -64,7 +94,7 @@ const Login: React.FC = () => {
 
           <Form.Item {...tailLayout}>
             <Button type="primary" block htmlType="submit">
-              Submit
+              提交
             </Button>
           </Form.Item>
         </Form>

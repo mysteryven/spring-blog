@@ -10,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collections;
@@ -30,6 +27,7 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
+    @CrossOrigin("*")
     @GetMapping("/auth")
     @ResponseBody
     public Object auth() {
@@ -47,6 +45,7 @@ public class AuthController {
     }
 
 
+    @CrossOrigin("*")
     @PostMapping("auth/register")
     @ResponseBody
     public Object register(@RequestBody Map<String, String> usernameAndPassword) {
@@ -64,6 +63,7 @@ public class AuthController {
         return new Result("ok", "注册成功", true);
     }
 
+    @CrossOrigin("*")
     @PostMapping("/auth/login")
     @ResponseBody
     public Object login(@RequestBody Map<String, String> usernameAndPassword) {
@@ -74,10 +74,10 @@ public class AuthController {
         try {
             realUser = userService.getUserByUserName(username);
             if (realUser == null) {
-                return new Result("fail", "用户不存在", false);
+                return new Result("fail", "用户不存在，请先注册", false);
             }
         } catch (UsernameNotFoundException e) {
-            return new Result("fail", "用户不存在", false);
+            return new Result("fail", "用户不存在，请先注册", false);
         }
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
@@ -93,6 +93,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin("*")
     @PostMapping("/auth/logout")
     @ResponseBody
     public Object logout() {
