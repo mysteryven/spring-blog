@@ -2,7 +2,7 @@ import React, {useEffect, useReducer} from "react"
 import Pin from "../pin"
 import NewPin from "../new-pin"
 import "./index.less"
-import {Pagination} from "antd"
+import {Pagination, Spin} from "antd"
 import {getRequest} from "../../server/request"
 import {blog} from "../../server/api"
 
@@ -98,12 +98,14 @@ const Pins = () => {
           })
         }
       </div>
+      {state.list.length === 0 && <Spin/>}
+      {state.list.length > 0 &&
       <Pagination
-        current={state.pageNo}
-        pageSize={state.pageSize}
-        total={state.total}
-        onChange={handleSearch}
-      />
+          current={state.pageNo}
+          pageSize={state.pageSize}
+          total={state.total}
+          onChange={handleSearch}
+      />}
     </div>
   )
 }
