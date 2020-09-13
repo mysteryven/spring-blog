@@ -43,4 +43,8 @@ public class BlogDao {
     public void updateBlog(Blog blog) {
         sqlSession.update("updateBlog", blog);
     }
+
+    public Object getBlogTotal() {
+        return sqlSession.selectOne("selectBlogCount");
+    }
 }

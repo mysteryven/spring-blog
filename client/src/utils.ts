@@ -20,6 +20,10 @@ export interface Res {
   status: 'fail' | 'ok'
 }
 
+interface PrimaryTypeObject {
+  [key: string]: any;
+}
+
 export function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -33,3 +37,14 @@ export function handleResult(res: AxiosResponse<Res>, success : Callback, fail?:
     fail && fail(res.data.msg)
   }
 }
+
+export  function beQueryString(obj: PrimaryTypeObject, prefix: string = '?'): string {
+  return Object.keys(obj).reduce((prev, cur, index) => {
+    let connector = '';
+    if (index !== 0) {
+      connector = '&';
+    }
+    return `${prev}${connector}${cur}=${obj[cur]}`;
+  }, prefix)
+}
+

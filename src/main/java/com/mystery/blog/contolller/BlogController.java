@@ -1,5 +1,6 @@
 package com.mystery.blog.contolller;
 
+import com.mystery.blog.entity.BlogResult;
 import com.mystery.blog.service.BlogService;
 import com.mystery.blog.service.UserService;
 import com.mystery.blog.entity.Blog;
@@ -31,19 +32,23 @@ public class BlogController {
         if (pageNo < 0) {
             pageNo = 1;
         }
-        return blogService.getBlogs(pageNo, pageSize, userId);
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("list", blogService.getBlogs(pageNo, pageSize, userId));
+        map.put("total", blogService.getBlogTotal());
+
+        return map;
     }
 
     @CrossOrigin("*")
     @PostMapping("blog")
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {
-
         Blog blog = generatorBlog(map);
 
         blogService.insertBlog(blog);
 
-        return "hi";
+        return new BlogResult("ok", "成功");
     }
 
     private Blog generatorBlog(HashMap<String, String> map) {

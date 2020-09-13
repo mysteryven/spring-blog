@@ -27,4 +27,8 @@ public class BlogService {
     public void updateBlog(String id, Blog blog) {
         blogDao.updateBlog(blog);
     }
+
+    public Object getBlogTotal() {
+        return blogDao.getBlogTotal();
+    }
 }

@@ -1,9 +1,15 @@
 import React from 'react';
 import './index.less';
 import {HeartTwoTone, MessageTwoTone} from "@ant-design/icons/lib";
+import {Pagination} from "antd";
+import {APin} from "../pins";
 
-const Pin = () => {
+interface PinProps {
+  pin: APin
+}
 
+const Pin: React.FC<PinProps> = (props) => {
+  const {title, url, description, user} = props.pin;
   const style = {
     fontSize: 20
   }
@@ -11,29 +17,26 @@ const Pin = () => {
   return (
     <div className="pin-wrapper">
       <div className="main-content">
-        <a className="title">
-          文明之光为什么好看？
+        <a className="title" href={url} target={"_blank"}>
+          {title}
         </a>
         <div className="instruction">
-          王文哲投稿
+          {user.username}投稿
         </div>
       </div>
       <div className="recommended-language">
-        推荐语：因为他做了很多不可思议的事情，出发点。
-        推荐语：因为他做了很多不可思议的事情，出发点。
-        推荐语：因为他做了很多不可思议的事情，出发点。
-        推荐语：因为他做了很多不可思议的事情，出发点。
+        {description || '这个人懒死了，没有写推荐语'}
       </div>
-      <div className="infos">
-        <div className={'info'}>
-          <HeartTwoTone style={style} twoToneColor="#fb7299"  />
-          <span className={'num'}>(12)</span>
-        </div>
-        <div className={'info'}>
-          <MessageTwoTone style={style} twoToneColor="#fb7299"  />
-          <span className={'num'}>(12)</span>
-        </div>
-      </div>
+      {/*<div className="infos">*/}
+      {/*  <div className={'info'}>*/}
+      {/*    <HeartTwoTone style={style} twoToneColor="#fb7299"  />*/}
+      {/*    <span className={'num'}>(12)</span>*/}
+      {/*  </div>*/}
+      {/*  <div className={'info'}>*/}
+      {/*    <MessageTwoTone style={style} twoToneColor="#fb7299"  />*/}
+      {/*    <span className={'num'}>(12)</span>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </div>
   )
 }

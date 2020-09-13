@@ -41,6 +41,9 @@
         FROM blog
         where id = #{id}
     </delete>
+    <select id="selectBlogCount" resultType="int">
+        SELECT count(*) FROM blog
+    </select>
     <resultMap id="blog" type="com.mystery.blog.entity.Blog">
         <id property="id" column="blog_id"/>
         <result property="title" column="blog_title"/>
