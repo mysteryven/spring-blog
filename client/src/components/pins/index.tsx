@@ -83,7 +83,7 @@ const Pins = () => {
         payload: res.data.list
       })
     } catch (e) {
-      failNotification("没有权限访问，是不是没有登录？");
+      failNotification("没有权限访问，是不是没有登录？")
     }
   }
 

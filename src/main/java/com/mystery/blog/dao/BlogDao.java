@@ -12,6 +12,11 @@ import java.util.List;
 public class BlogDao {
     private final SqlSession sqlSession;
 
+    @Inject
+    public BlogDao(SqlSession sqlSession) {
+        this.sqlSession = sqlSession;
+    }
+
     public HashMap<String, Object> asMap(Object... args) {
         HashMap<String, Object> map = new HashMap<>();
 
@@ -19,11 +24,6 @@ public class BlogDao {
             map.put(args[i].toString(), args[i + 1]);
         }
         return map;
-    }
-
-    @Inject
-    public BlogDao(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
     }
 
     public List<Blog> getBlogs(Integer pageNo, Integer pageSize, Integer userId) {

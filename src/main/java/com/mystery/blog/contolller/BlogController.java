@@ -1,9 +1,9 @@
 package com.mystery.blog.contolller;
 
+import com.mystery.blog.entity.Blog;
 import com.mystery.blog.entity.BlogResult;
 import com.mystery.blog.service.BlogService;
 import com.mystery.blog.service.UserService;
-import com.mystery.blog.entity.Blog;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +12,8 @@ import java.util.HashMap;
 
 @Controller
 public class BlogController {
-    private BlogService blogService;
-    private UserService userService;
+    private final BlogService blogService;
+    private final UserService userService;
 
     @Inject
     public BlogController(BlogService blogService, UserService userService) {
@@ -27,7 +27,7 @@ public class BlogController {
     public Object blog(
             @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
-            @RequestParam(value="userId", required = false) Integer userId
+            @RequestParam(value = "userId", required = false) Integer userId
     ) {
         if (pageNo < 0) {
             pageNo = 1;

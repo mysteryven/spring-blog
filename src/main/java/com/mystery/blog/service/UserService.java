@@ -1,6 +1,6 @@
 package com.mystery.blog.service;
 
-import com.mystery.blog.dao.UserMapper;
+import com.mystery.blog.dao.UserDao;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -16,21 +16,20 @@ import java.util.Collections;
 @Service
 public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserMapper userMapper;
-
+    private final UserDao userDao;
 
     @Inject
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper) {
+    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserDao userDao) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userMapper = userMapper;
+        this.userDao = userDao;
     }
 
     public void save(String username, String password) {
-        userMapper.saveUser(username, bCryptPasswordEncoder.encode(password));
+        userDao.saveUser(username, bCryptPasswordEncoder.encode(password));
     }
 
     public com.mystery.blog.entity.User getUserByUserName(String username) {
-        return userMapper.findUserByUsername(username);
+        return userDao.findUserByUsername(username);
     }
 
     public com.mystery.blog.entity.User getCurrentUser() {

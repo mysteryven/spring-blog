@@ -69,7 +69,7 @@ const NewPin = () => {
             label="推荐语"
             name="description"
           >
-            <Input.TextArea />
+            <Input.TextArea/>
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type="primary" block htmlType="submit">

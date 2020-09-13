@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class BlogService {
-    private BlogDao blogDao;
+    private final BlogDao blogDao;
 
     @Inject
     public BlogService(BlogDao blogDao) {
@@ -17,10 +17,10 @@ public class BlogService {
     }
 
     public List<Blog> getBlogs(Integer pageNo, Integer pageSize, Integer userId) {
-       return blogDao.getBlogs(pageNo, pageSize, userId);
+        return blogDao.getBlogs(pageNo, pageSize, userId);
     }
 
-    public void insertBlog( Blog blog) {
+    public void insertBlog(Blog blog) {
         blogDao.insertBlog(blog);
     }
 

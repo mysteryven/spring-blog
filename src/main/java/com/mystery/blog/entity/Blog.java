@@ -1,7 +1,5 @@
 package com.mystery.blog.entity;
 
-import java.sql.Timestamp;
-
 public class Blog {
     private int id;
     private String title;

@@ -39,9 +39,9 @@ export function handleResult(res: AxiosResponse<Res>, success: Callback, fail?: 
 }
 
 export function beQueryString(obj: PrimaryTypeObject, prefix: string = "?"): string {
-  const keys = Object.keys(obj);
+  const keys = Object.keys(obj)
   if (keys.length === 0) {
-    return ''
+    return ""
   }
   return keys.reduce((prev, cur, index) => {
     let connector = ""
