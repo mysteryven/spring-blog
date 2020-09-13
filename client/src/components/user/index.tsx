@@ -23,7 +23,7 @@ const User: React.FC<UserProps> = (props) => {
       okText: '确认',
       cancelText: '取消',
       onOk: () => {
-        postRequest(logout).then(res => {
+        getRequest(logout).then(res => {
           handleResult(res, () => {
             successNotification("登出成功");
             props.updateLoginStatus(false);

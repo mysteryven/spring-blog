@@ -18,7 +18,6 @@ const Header = () => {
     getRequest(auth).then(res => {
 
       setLoginStatus(res.data.login);
-      setUsername("hihihi")
       res.data.data && setUsername(res.data.data.username)
     })
   }

@@ -96,7 +96,7 @@ public class AuthController {
     }
 
     @CrossOrigin("*")
-    @PostMapping("/auth/logout")
+    @GetMapping("/auth/logout")
     @ResponseBody
     public Object logout() {
         SecurityContextHolder.clearContext();

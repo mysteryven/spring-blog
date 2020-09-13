@@ -1,9 +1,18 @@
 import React, {useState} from "react";
-import {Button, Form, Input, Modal, notification} from "antd";
-import {layout} from "../login";
+import {Button, Form, Input, Modal} from "antd";
+import {layout, tailLayout} from "../login";
+import {getRequest, postRequest} from "../../server/request";
+import {blog} from "../../server/api";
+import {successNotification} from "../../utils";
+
+interface Values {
+  title: string;
+  url: string;
+  description: string;
+}
 
 const NewPin = () => {
-  const [visible, setVisible] = useState();
+  const [visible, setVisible] = useState<boolean>();
 
   function handleOk() {
     setVisible(true)
@@ -13,11 +22,13 @@ const NewPin = () => {
     setVisible(false)
   }
 
-  function onFinish() {
-    notification['success']({
-      message: '登录成功',
-      description:
-        ' 恭喜你，已经登录成功了',
+  function onFinish(values: Values) {
+    postRequest(blog, {
+      ...values,
+      type: 1
+    }).then((res) => {
+      successNotification("新增成功");
+      handleCancel();
     });
   }
 
@@ -28,6 +39,7 @@ const NewPin = () => {
         title="投稿"
         visible={visible}
         onOk={handleOk}
+        footer={null}
         onCancel={handleCancel}
       >
         <Form
@@ -36,17 +48,30 @@ const NewPin = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="title"
+            label="标题"
             name="title"
+            rules={[{required: true, message: '亲亲，要写稿件标题哦！'}]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            label="链接地址"
+            name="url"
+            rules={[{required: true, message: '亲亲，要写稿件地址哦！'}]}
           >
             <Input/>
           </Form.Item>
 
           <Form.Item
-            label="content"
-            name="content"
+            label="推荐语"
+            name="description"
           >
             <Input.TextArea/>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" block htmlType="submit">
+              投一个
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
