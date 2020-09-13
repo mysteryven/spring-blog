@@ -5,6 +5,7 @@ import "./index.less"
 import {Pagination, Spin} from "antd"
 import {getRequest} from "../../server/request"
 import {blog} from "../../server/api"
+import {failNotification} from "../../utils"
 
 interface PinReducerState {
   pageNo: number;
@@ -62,26 +63,28 @@ const Pins = () => {
   }, [])
 
   async function getPins(pageNo: number, pageSize: number) {
-    const res = await getRequest(blog, {
-      pageNo,
-      pageSize
-    })
-    console.log(res)
+    try {
+      const res = await getRequest(blog, {
+        pageNo,
+        pageSize
+      })
+      console.log(res)
 
-    dispatch({
-      type: "updatePagination",
-      payload: {
-        pageNo: pageNo,
-        total: res.data.total
-      }
-    })
+      dispatch({
+        type: "updatePagination",
+        payload: {
+          pageNo: pageNo,
+          total: res.data.total
+        }
+      })
 
-    dispatch({
-      type: "updateList",
-      payload: res.data.list
-    })
-
-    console.log(res)
+      dispatch({
+        type: "updateList",
+        payload: res.data.list
+      })
+    } catch (e) {
+      failNotification("没有权限访问，是不是没有登录？");
+    }
   }
 
   function handleSearch(pageNo: number = 1, pageSize: number = 10) {

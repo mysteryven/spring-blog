@@ -28,7 +28,6 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-    @CrossOrigin("*")
     @GetMapping("/auth")
     @ResponseBody
     public Object auth() {
@@ -45,8 +44,6 @@ public class AuthController {
         }
     }
 
-
-    @CrossOrigin("*")
     @PostMapping("auth/register")
     @ResponseBody
     public Object register(@RequestBody Map<String, String> usernameAndPassword) {
@@ -64,7 +61,6 @@ public class AuthController {
         return new Result("ok", "注册成功", true);
     }
 
-    @CrossOrigin("*")
     @PostMapping("/auth/login")
     @ResponseBody
     public Object login(
@@ -95,7 +91,6 @@ public class AuthController {
         }
     }
 
-    @CrossOrigin("*")
     @GetMapping("/auth/logout")
     @ResponseBody
     public Object logout() {

@@ -3,7 +3,7 @@ import {Button, Form, Input, Modal} from "antd"
 import {layout, tailLayout} from "../login"
 import {postRequest} from "../../server/request"
 import {blog} from "../../server/api"
-import {successNotification} from "../../utils"
+import {failNotification, successNotification} from "../../utils"
 
 interface Values {
   title: string;
@@ -29,7 +29,10 @@ const NewPin = () => {
     }).then((res) => {
       successNotification("新增成功")
       handleCancel()
+    }, (err) => {
+      failNotification("没有登录是不能投稿的")
     })
+
   }
 
   return (
@@ -59,14 +62,14 @@ const NewPin = () => {
             name="url"
             rules={[{required: true}]}
           >
-            <Input allowClear prefix={"https://"}/>
+            <Input allowClear/>
           </Form.Item>
 
           <Form.Item
             label="推荐语"
             name="description"
           >
-            <Input.TextArea/>
+            <Input.TextArea />
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type="primary" block htmlType="submit">
