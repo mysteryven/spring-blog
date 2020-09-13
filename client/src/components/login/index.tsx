@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Button, Form, Input, Modal, notification} from 'antd';
+import React, {useState, Fragment} from "react";
+import {Button, Form, Input, Modal} from 'antd';
 import './index.scss'
 import {postRequest} from "../../server/request";
 import {login, register} from "../../server/api";
@@ -19,8 +19,13 @@ interface LoginValues {
   password: string;
 }
 
+interface LoginProps {
+  loginStatus?: boolean;
+  updateLoginStatus: (status: boolean) => void
+}
 
-const Login: React.FC = () => {
+
+const Login: React.FC<LoginProps> = (props) => {
   const [visible, setVisible] = useState<boolean>();
   const [type, setType] = useState<'login' | 'register'>();
 
@@ -40,7 +45,8 @@ const Login: React.FC = () => {
     try {
       const res: AxiosResponse<Res> = await postRequest(api, values);
       handleResult(res, () => {
-        successNotification( text + "成功")
+        successNotification(text + "成功")
+        props.updateLoginStatus(true);
         setVisible(false)
       }, (msg) => {
         failNotification(msg)
@@ -63,8 +69,13 @@ const Login: React.FC = () => {
 
   return (
     <div className={"pins-login"}>
-      <div className={"login"} onClick={handleLogin}>登录</div>
-      <div className={"register"} onClick={handleRegister}>注册</div>
+      {
+        !props.loginStatus &&
+        <Fragment>
+          <div className={"login"} onClick={handleLogin}>登录</div>
+          <div className={"register"} onClick={handleRegister}>注册</div>
+        </Fragment>
+      }
       <Modal
         title={computeStatusText()}
         footer={null}
