@@ -21,6 +21,7 @@ interface LoginValues {
 
 interface LoginProps {
   loginStatus?: boolean;
+  username?: string;
   updateLoginStatus: (status: boolean) => void
 }
 

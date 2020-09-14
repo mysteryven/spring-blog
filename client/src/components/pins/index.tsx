@@ -55,7 +55,11 @@ function reducer(state: PinReducerState, action: PinReducerAction) {
   }
 }
 
-const Pins = () => {
+interface PinsProps {
+  loginStatus?: boolean;
+}
+
+const Pins:React.FC<PinsProps> = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
@@ -93,7 +97,7 @@ const Pins = () => {
 
   return (
     <div className={"pins-wrapper"}>
-      <NewPin/>
+      {props.loginStatus && <NewPin/> }
       <div className="pins-container">
         {
           state.list.map(function (pin: APin) {

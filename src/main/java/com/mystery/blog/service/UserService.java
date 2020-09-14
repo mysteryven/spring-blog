@@ -15,14 +15,18 @@ import java.util.Collections;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserDao userDao;
 
     @Inject
-    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserDao userDao) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userDao = userDao;
-    }
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Inject
+    private UserDao userDao;
+
+//    @Inject
+//    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserDao userDao) {
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//        this.userDao = userDao;
+//    }
 
     public void save(String username, String password) {
         userDao.saveUser(username, bCryptPasswordEncoder.encode(password));
