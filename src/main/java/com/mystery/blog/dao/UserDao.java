@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.Instant;
 import java.util.HashMap;
 
 @Service
@@ -21,9 +22,12 @@ public class UserDao {
     }
 
     public void saveUser(String username, String password) {
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("username", username);
         map.put("password", password);
+        map.put("createdAt", Instant.now());
+        map.put("modifiedAt",Instant.now());
+
         sqlSession.insert("insertUser", map);
     }
 

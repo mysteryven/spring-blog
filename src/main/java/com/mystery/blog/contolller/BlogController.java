@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.time.Instant;
 import java.util.HashMap;
 
 @Controller
@@ -44,26 +45,30 @@ public class BlogController {
     @PostMapping("blog")
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {
-        Blog blog = generatorBlog(map);
+        Blog blog = generatorBlog(map, true);
 
         blogService.insertBlog(blog);
 
         return new BlogResult("ok", "成功");
     }
 
-    private Blog generatorBlog(HashMap<String, String> map) {
+    private Blog generatorBlog(HashMap<String, String> map, boolean isNew) {
         Blog blog = new Blog();
         blog.setTitle(map.get("title"));
         blog.setContent(map.get("content"));
         blog.setDescription(map.get("description"));
         blog.setType(map.getOrDefault("type", "1"));
         blog.setUrl(map.get("url"));
+        if (isNew) {
+            blog.setCreatedAt(Instant.now());
+        }
+        blog.setModifiedAt(Instant.now());
         blog.setUser(userService.getCurrentUser());
         return blog;
     }
 
     public Object updateBlog(@RequestBody HashMap<String, String> map) {
-        Blog blog = generatorBlog(map);
+        Blog blog = generatorBlog(map, false);
 
         blogService.updateBlog(map.get("id"), blog);
 

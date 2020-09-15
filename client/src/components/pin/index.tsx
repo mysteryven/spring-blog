@@ -34,7 +34,7 @@ const Pin: React.FC<PinProps> = (props) => {
         </div>
       </div>
       <div className="recommended-language">
-        {description || "他有点懒，没有写推荐语"}
+        {description || "他有点懒，没有写推荐语。"}
       </div>
       {/*<div className="infos">*/}
       {/*  <div className={'info'}>*/}
