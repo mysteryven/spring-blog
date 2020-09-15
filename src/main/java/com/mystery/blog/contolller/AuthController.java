@@ -34,13 +34,15 @@ public class AuthController {
     @ResponseBody
     public Object auth() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Result errorResult = new Result("fail", "没有登录", false);
+
         if (authentication == null) {
-            return new Result("fail", "没有登录1", false);
+            return errorResult;
         } else {
             String username = authentication.getName();
             User user = userService.getUserByUserName(username);
             if (user == null) {
-                return new Result("fail", "没有登录", false);
+                return errorResult;
             }
             return new Result("ok", "登录成功", true, user);
         }
@@ -69,15 +71,17 @@ public class AuthController {
             @RequestBody Map<String, String> usernameAndPassword) {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
+        Result errorResult =  new Result("fail", "用户不存在，请先注册", false);
+
         User realUser;
 
         try {
             realUser = userService.getUserByUserName(username);
             if (realUser == null) {
-                return new Result("fail", "用户不存在，请先注册", false);
+                return errorResult;
             }
         } catch (UsernameNotFoundException e) {
-            return new Result("fail", "用户不存在，请先注册", false);
+            return errorResult;
         }
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
