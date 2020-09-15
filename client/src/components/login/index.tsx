@@ -39,7 +39,6 @@ const Login: React.FC<LoginProps> = (props) => {
   }
 
   async function onFinish(values: LoginValues) {
-    console.log(values)
     const text = computeStatusText()
     const api = type === "login" ? login : register
 

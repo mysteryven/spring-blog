@@ -72,7 +72,6 @@ const Pins:React.FC<PinsProps> = (props) => {
         pageNo,
         pageSize
       })
-      console.log(res)
 
       dispatch({
         type: "updatePagination",

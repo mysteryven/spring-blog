@@ -3,12 +3,14 @@ import {AxiosResponse} from "axios"
 
 export const successNotification = (description: string, message?: string) => notification["success"]({
   message: message || "成功",
+  duration: 1500,
   description:
     description || ""
 })
 
 export const failNotification = (description: string, message?: string) => notification["error"]({
   message: message || "失败",
+  duration: 1500,
   description:
     description || ""
 })
