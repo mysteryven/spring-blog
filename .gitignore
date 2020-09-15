@@ -35,3 +35,4 @@ build/
 /node_modules
 yarn.lock
 package-lock.json
+/client/node_modules
