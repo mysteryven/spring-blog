@@ -30,7 +30,7 @@ const Pin: React.FC<PinProps> = (props) => {
           {title}
         </a>
         <div className="instruction">
-          {user.username}投稿[{formatTime(createdAt)}]
+          {user.username}投稿
         </div>
       </div>
       <div className="recommended-language">
