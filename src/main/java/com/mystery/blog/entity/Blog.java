@@ -1,6 +1,7 @@
 package com.mystery.blog.entity;
 
 import java.time.Instant;
+import java.util.Date;
 
 public class Blog {
     private int id;
@@ -9,8 +10,8 @@ public class Blog {
     private String content;
     private String description;
     private String type;
-    private Instant createdAt;
-    private Instant modifiedAt;
+    private Date createdAt;
+    private Date modifiedAt;
     private User user;
 
     public String getType() {
@@ -61,19 +62,19 @@ public class Blog {
         this.description = description;
     }
 
-    public Instant getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getModifiedAt() {
+    public Date getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(Instant modifiedAt) {
+    public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 

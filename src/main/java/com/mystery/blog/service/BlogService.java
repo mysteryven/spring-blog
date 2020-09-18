@@ -5,6 +5,7 @@ import com.mystery.blog.entity.Blog;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -22,6 +23,13 @@ public class BlogService {
 
     public void insertBlog(Blog blog) {
         blogDao.insertBlog(blog);
+    }
+
+    public Blog getBlog(Integer id, Integer userId) {
+        HashMap<String, Integer> ids = new HashMap<>();
+        ids.put("id", id);
+        ids.put("userId", userId);
+        return blogDao.getBlog(ids);
     }
 
     public void updateBlog(String id, Blog blog) {

@@ -7,7 +7,7 @@ create table blog
     description VARCHAR(500),
     type        INT, # 1 -> 投稿，2 -> 自制
     user_id     INT,
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    created_at   datetime,
+    modified_at  datetime
 );
 

@@ -2,6 +2,7 @@ package com.mystery.blog.contolller;
 
 import com.mystery.blog.entity.Blog;
 import com.mystery.blog.entity.BlogResult;
+import com.mystery.blog.entity.User;
 import com.mystery.blog.service.BlogService;
 import com.mystery.blog.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.HashMap;
 
 @Controller
@@ -47,6 +51,7 @@ public class BlogController {
     public Object newBlog(@RequestBody HashMap<String, String> map) {
         Blog blog = generatorBlog(map, true);
 
+
         blogService.insertBlog(blog);
 
         return new BlogResult("ok", "新增成功");
@@ -60,13 +65,14 @@ public class BlogController {
         blog.setType(map.getOrDefault("type", "1"));
         blog.setUrl(map.get("url"));
         if (isNew) {
-            blog.setCreatedAt(Instant.now());
+            blog.setCreatedAt(new Date());
         }
-        blog.setModifiedAt(Instant.now());
+        blog.setModifiedAt(new Date());
         blog.setUser(userService.getCurrentUser());
         return blog;
     }
 
+    @CrossOrigin("*")
     @PatchMapping("blog")
     @ResponseBody
     public Object updateBlog(@RequestBody HashMap<String, String> map) {
@@ -77,10 +83,23 @@ public class BlogController {
         return new BlogResult("ok", "修改成功");
     }
 
+    @CrossOrigin("*")
+    @DeleteMapping("blog")
+    @ResponseBody
     public Object deleteBlog(@RequestParam (required = true) Integer id) {
-        blogService.deleteBlog(id);
-
-
-        return new BlogResult("ok", "删除成功");
+        User user = userService.getCurrentUser();
+        if (user == null) {
+            return new BlogResult("fail", "用户不存在");
+        }
+        try {
+            Blog blog = blogService.getBlog(id, user.getId());
+            if (blog == null) {
+                return new BlogResult("fail", "只有自己的博客才能删除");
+            }
+            blogService.deleteBlog(id);
+            return new BlogResult("ok", "删除成功");
+        } catch (Error e) {
+            return new BlogResult("ok", "删除失败");
+        }
     }
 }

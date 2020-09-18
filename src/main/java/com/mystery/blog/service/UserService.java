@@ -35,6 +35,10 @@ public class UserService implements UserDetailsService {
         return userDao.findUserByUsername(username);
     }
 
+    public int getUserId(String username) {
+        return userDao.getUserId(username);
+    }
+
     public com.mystery.blog.entity.User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return this.getUserByUserName(authentication == null ? null : authentication.getName());

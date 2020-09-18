@@ -1,8 +1,8 @@
-import React, {useEffect, useReducer} from "react"
+import React, {useEffect, useReducer, useState} from "react"
 import Pin from "../pin"
 import NewPin from "../new-pin"
 import "./index.less"
-import {Pagination, Spin} from "antd"
+import {Pagination, Spin, Switch} from "antd"
 import {getRequest} from "../../server/request"
 import {blog} from "../../server/api"
 import {failNotification} from "../../utils"
@@ -50,6 +50,11 @@ function reducer(state: PinReducerState, action: PinReducerAction) {
         ...state,
         list: action.payload
       }
+    case "setLoading":
+      return {
+        ...state,
+        loading: action.payload
+      }
     default:
       return state
   }
@@ -61,17 +66,22 @@ interface PinsProps {
 
 const Pins:React.FC<PinsProps> = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [mode, setMode] = useState<"me" | "all">();
 
   useEffect(() => {
     getPins(state.pageNo, state.pageSize)
   }, [])
 
+  useEffect(() => {
+    if (mode === 'me') {
+
+    }
+  }, [mode])
+
   async function getPins(pageNo: number, pageSize: number) {
+    dispatch({ type: "setLoading", payload: true })
     try {
-      const res = await getRequest(blog, {
-        pageNo,
-        pageSize
-      })
+      const res = await getRequest(blog, { pageNo, pageSize })
 
       dispatch({
         type: "updatePagination",
@@ -81,12 +91,11 @@ const Pins:React.FC<PinsProps> = (props) => {
         }
       })
 
-      dispatch({
-        type: "updateList",
-        payload: res.data.list
-      })
+      dispatch({ type: "updateList", payload: res.data.list })
     } catch (e) {
       failNotification("没有权限访问，是不是没有登录？")
+    } finally {
+      dispatch({ type: "setLoading", payload: false })
     }
   }
 
@@ -94,17 +103,25 @@ const Pins:React.FC<PinsProps> = (props) => {
     getPins(pageNo, pageSize)
   }
 
+  function switchMode(checked: boolean ) {
+    setMode(checked ? "me" : "all");
+  }
+
   return (
     <div className={"pins-wrapper"}>
-      {props.loginStatus && <NewPin/> }
+      <div className={"switch-mode"}>
+        <Switch onChange={switchMode} />
+        <span>只看我的</span>
+      </div>
+      <NewPin/>
       <div className="pins-container">
         {
           state.list.map(function (pin: APin) {
-            return <Pin pin={pin} key={pin.id}/>
+            return <Pin mode={"me"} pin={pin} key={pin.id}/>
           })
         }
       </div>
-      {state.list.length === 0 && <Spin/>}
+      {state.isLoading && <Spin/>}
       {state.list.length > 0 &&
       <Pagination
           current={state.pageNo}

@@ -10,7 +10,7 @@
         </if>
     </select>
     <insert id="insertUser" parameterType="map">
-        INSERT INTO user (username, password)
-        VALUES (#{username}, #{password})
+        INSERT INTO user (username, password, created_at, modified_at)
+        VALUES (#{username}, #{password}, #{createdAt}, #{modifiedAt})
     </insert>
 </mapper>

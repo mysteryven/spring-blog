@@ -27,21 +27,27 @@
     <insert id="insertBlog" parameterType="com.mystery.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id">
         INSERT INTO blog (title, content, description, type, url, user_id, created_at, modified_at)
-        VALUES (#{title}, #{content}, #{description}, #{type}, #{url}, #{userId}, #{created_at}, #{modified_at})
+        VALUES (#{title}, #{content}, #{description}, #{type}, #{url}, #{userId}, #{createdAt}, #{modifiedAt})
     </insert>
     <update id="updateBlog" parameterType="com.mystery.blog.entity.Blog">
         UPDATE blog
         SET title       = #{title},
             content     = #{content},
-            description = #{description}
+            description = #{description},
             modified_at = #{modifiedAt}
         where id = #{id}
     </update>
     <delete id="deleteBlog" parameterType="int">
-        delete
+        DELETE
         FROM blog
-        where id = #{id}
+        WHERE id = #{id}
     </delete>
+    <select id="selectOneBlog" parameterType="int">
+        SELECT *
+        FROM blog
+        join user on user_id = user.id
+        WHERE user_id = #{userId} and blog.id = #{id}
+    </select>
     <select id="selectBlogCount" resultType="int">
         SELECT count(*)
         FROM blog
@@ -52,8 +58,8 @@
         <result property="content" column="blog_content"/>
         <result property="url" column="blog_url"/>
         <result property="description" column="blog_description"/>
-        <result property="modifiedAt" column="blog_modified_at"/>
         <result property="createdAt" column="blog_created_at"/>
+        <result property="modifiedAt" column="blog_modified_at"/>
         <association property="user" javaType="com.mystery.blog.entity.User">
             <id property="id" column="user_id"/>
             <result property="username" column="user_username"/>

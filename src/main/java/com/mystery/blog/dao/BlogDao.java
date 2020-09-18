@@ -5,8 +5,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Service
 public class BlogDao {
@@ -33,8 +38,11 @@ public class BlogDao {
                 "limit", pageSize
         );
 
-        return sqlSession.selectList("selectBlog", parameters);
+        List<Blog> blogs = sqlSession.selectList("selectBlog", parameters);
+        return blogs;
     }
+
+
 
     public void insertBlog(Blog blog) {
         sqlSession.insert("insertBlog", blog);
@@ -50,5 +58,9 @@ public class BlogDao {
 
     public void deleteBlog(Integer id) {
         sqlSession.delete("deleteBlog", id);
+    }
+
+    public Blog getBlog(HashMap<String, Integer> ids) {
+        return sqlSession.selectOne("selectOneBlog", ids);
     }
 }

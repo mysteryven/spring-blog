@@ -1,19 +1,17 @@
-import {notification} from "antd"
+import {message} from "antd"
 import {AxiosResponse} from "axios"
 
-export const successNotification = (description: string, message?: string) => notification["success"]({
-  message: message || "成功",
-  duration: 1000,
-  description:
-    description || ""
-})
+message.config({
+  duration: 1,
+});
 
-export const failNotification = (description: string, message?: string) => notification["error"]({
-  message: message || "失败",
-  duration: 1000,
-  description:
-    description || ""
-})
+export const successNotification = (description: string, msg?: string) => {
+  message.success(description);
+}
+
+export const failNotification = (description: string, msg?: string) => {
+  message.error(description)
+}
 
 
 export interface Res {

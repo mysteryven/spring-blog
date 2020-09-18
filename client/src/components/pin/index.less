@@ -7,7 +7,7 @@
   margin-bottom: 16px;
 
   .title {
-    font-weight: 500;
+    font-weight: bold;
   }
 
   .main-content {
@@ -23,9 +23,9 @@
   }
 
   .recommended-language {
-    color: #baabab;
+    color: #50575b;
     text-align: left;
-    padding: 16px 12px 0 12px;
+    padding: 16px 12px 0 16px;
   }
 
   .infos {
@@ -41,6 +41,18 @@
       color: var(--mainColor);
       display: flex;
       align-items: center;
+    }
+  }
+
+  .operator-btn-group {
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+    padding-right: 16px;
+    justify-content: flex-end;
+
+    &>button:last-child {
+      margin-left: 8px;
     }
   }
 }

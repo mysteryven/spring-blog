@@ -31,4 +31,9 @@ public class UserDao {
         sqlSession.insert("insertUser", map);
     }
 
+    public int getUserId(String username) {
+        User user = findUserByUsername(username);
+
+        return user.getId();
+    }
 }

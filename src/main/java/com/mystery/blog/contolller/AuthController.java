@@ -10,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collections;
@@ -30,6 +27,7 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
+    @CrossOrigin("*")
     @GetMapping("/auth")
     @ResponseBody
     public Object auth() {
@@ -48,6 +46,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin("*")
     @PostMapping("auth/register")
     @ResponseBody
     public Object register(@RequestBody Map<String, String> usernameAndPassword) {
@@ -65,6 +64,7 @@ public class AuthController {
         return new Result("ok", "注册成功", true);
     }
 
+    @CrossOrigin("*")
     @PostMapping("/auth/login")
     @ResponseBody
     public Object login(
@@ -97,6 +97,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin("*")
     @GetMapping("/auth/logout")
     @ResponseBody
     public Object logout() {
