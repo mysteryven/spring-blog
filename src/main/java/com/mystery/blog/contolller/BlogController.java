@@ -49,7 +49,7 @@ public class BlogController {
 
         blogService.insertBlog(blog);
 
-        return new BlogResult("ok", "成功");
+        return new BlogResult("ok", "新增成功");
     }
 
     private Blog generatorBlog(HashMap<String, String> map, boolean isNew) {
@@ -67,11 +67,20 @@ public class BlogController {
         return blog;
     }
 
+    @PatchMapping("blog")
+    @ResponseBody
     public Object updateBlog(@RequestBody HashMap<String, String> map) {
         Blog blog = generatorBlog(map, false);
 
         blogService.updateBlog(map.get("id"), blog);
 
-        return "edit";
+        return new BlogResult("ok", "修改成功");
+    }
+
+    public Object deleteBlog(@RequestParam (required = true) Integer id) {
+        blogService.deleteBlog(id);
+
+
+        return new BlogResult("ok", "删除成功");
     }
 }

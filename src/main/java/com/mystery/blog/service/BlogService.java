@@ -31,4 +31,8 @@ public class BlogService {
     public Object getBlogTotal() {
         return blogDao.getBlogTotal();
     }
+
+    public void deleteBlog(Integer id) {
+        blogDao.deleteBlog(id);
+    }
 }

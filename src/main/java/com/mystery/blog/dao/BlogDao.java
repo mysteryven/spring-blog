@@ -47,4 +47,8 @@ public class BlogDao {
     public Object getBlogTotal() {
         return sqlSession.selectOne("selectBlogCount");
     }
+
+    public void deleteBlog(Integer id) {
+        sqlSession.delete("deleteBlog", id);
+    }
 }
