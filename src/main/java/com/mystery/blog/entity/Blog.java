@@ -1,6 +1,5 @@
 package com.mystery.blog.entity;
 
-import java.time.Instant;
 import java.util.Date;
 
 public class Blog {

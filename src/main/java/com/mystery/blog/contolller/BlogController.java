@@ -9,9 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -26,7 +23,6 @@ public class BlogController {
         this.userService = userService;
     }
 
-    @CrossOrigin("*")
     @GetMapping("/blog")
     @ResponseBody
     public Object blog(
@@ -50,7 +46,6 @@ public class BlogController {
         return map;
     }
 
-    @CrossOrigin("*")
     @PostMapping("blog")
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {
@@ -76,7 +71,6 @@ public class BlogController {
         return blog;
     }
 
-    @CrossOrigin("*")
     @PatchMapping("blog/{blogId}")
     @ResponseBody
     public Object updateBlog(
@@ -89,7 +83,6 @@ public class BlogController {
         return new BlogResult("ok", "修改成功");
     }
 
-    @CrossOrigin("*")
     @DeleteMapping("blog")
     @ResponseBody
     public Object deleteBlog(@RequestParam (required = true) Integer id) {

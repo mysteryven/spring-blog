@@ -1,11 +1,9 @@
-import React, {useState} from "react"
+import React from "react"
 import "./index.less"
 import {APin} from "../pins"
-import {Button, Form, Input, Modal, Popconfirm} from "antd"
+import {Button, Popconfirm} from "antd"
 import {deleteRequest} from "../../server/request"
 import {failNotification, successNotification} from "../../utils"
-import NewPin from "../new-pin"
-import {layout, tailLayout} from "../login"
 
 interface PinProps {
   pin: APin,
@@ -43,7 +41,7 @@ const Pin: React.FC<PinProps> = (props) => {
     }).then(res => {
       if (res.data.status === 'ok') {
         successNotification("删除成功")
-        props.onRefrsh();
+        props.onRefresh();
       } else {
         failNotification(res.data.msg)
       }

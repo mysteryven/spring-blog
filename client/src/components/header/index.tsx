@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import User from "../user"
 import Login from "../login"
 import "./index.less"
-import {getRequest} from "../../server/request"
-import {auth} from "../../server/api"
 
 interface HeaderProps {
   loginStatus?: boolean;

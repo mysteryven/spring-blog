@@ -1,8 +1,8 @@
 import axios from "axios"
 import {beQueryString} from "../utils"
 
-// const baseUrl = "http://47.98.241.215:8080"
-const baseUrl = "http://192.168.0.143:8080"
+const baseUrl = "http://47.98.241.215:8080"
+// const baseUrl = "http://192.168.0.143:8080"
 // const baseUrl = "http://localhost:8080"
 
 export const getRequest = async (url: string, params: object = {}) => {

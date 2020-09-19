@@ -7,7 +7,6 @@ import {getRequest, patchRequest} from "../../server/request"
 import {blog} from "../../server/api"
 import {failNotification, successNotification} from "../../utils"
 import {layout, tailLayout} from "../login"
-import {FormInstance} from "antd/es/form"
 
 
 interface PinReducerState {
@@ -79,10 +78,6 @@ const Pins: React.FC<PinsProps> = (props) => {
   const [mode, setMode] = useState<"me" | "all">("all")
   const [visible, setVisible] = useState<boolean>()
   const [form] = Form.useForm();
-
-  useEffect(() => {
-    getPins(state.pageNo, state.pageSize)
-  }, [])
 
   useEffect(() => {
     if (mode === "me") {
