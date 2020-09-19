@@ -21,29 +21,30 @@ docker run --name my-sql -d -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -v 
 
 ### 运行
 
-需要安装 IDEA 和 Java 环境。配置好之后直接启动即可，目录为：
+需要安装 IDEA 和 Java 环境。如何配置，可以网上查阅。配置好之后直接启动即可，文件为：
 
 ```
-src/main/java/com/mystery/blog/Application
+src/main/java/com/mystery/blog/Application.java
 ```
 
 ## 上传到服务器
 
-0. 更改前端目录的 `baseUrl` 为你的服务器加端口号：
-``
+我没有使用自动化部署工具，使用了比较笨的方法。
+
+ps: 下面的服务器默认使用了我的，你可根据自己的需要进行替换。
+
+0. 更改前端目录的 `baseUrl` 为你的服务器加端口号，全局搜 `baseUrl` 就可以找到配置在哪。
+```
 const baseUrl = "http://47.98.241.215:8080"
-`` 
+```
 
-全局搜 `baseUrl` 就可以找到配置在哪。
-
-1. 更改 spring 连接的 mysql 是你在服务器启动的那个：
+1. 更改 spring 连接的 mysql 是你在服务器启动的那个。全局搜 `spring.datasource.url` 就可以找到配置在哪。值得注意的是 `172.16.105.140` 是你的局域网 ip 地址，可以使用 `ifconfig` 查看。
 
 ```
 spring.datasource.url=jdbc:mysql://172.16.105.140:3306/news
 ```
 
-全局搜 `spring.datasource.url` 就可以找到配置在哪。值得注意的是 `172.16.105.140` 是你的局域网 ip 地址，
-可以使用 `ifconfig` 查看。
+
 
 2. 打包前端项目
 
@@ -63,12 +64,10 @@ mvn clean package
 2. 暴力徒手上传
 
 ```
-scp target/demo-0.0.2-SNAPSHOT.jar root@[你的服务器地址]:~/java
+scp target/demo-0.0.2-SNAPSHOT.jar root@47.98.241.215:~/java
 ```
 
-3. 连接服务器后，在 java 目录写一个 `Dockerfile`
-
-如何连接服务器，可以配置 ssh，也可以直接登录你购买的服务器的后台。具体请搜索 ~
+3. 连接服务器后，在 java 目录写一个 `Dockerfile`。如何连接服务器，可以配置 ssh，也可以直接登录你购买的服务器的后台。具体请搜索 ~
 
 ```
 FROM openjdk:8
@@ -102,5 +101,5 @@ docker run -p 8080:8080 my-java-app
  docker exec -it my-sql1 mysql -uroot -p
 ```
 
-接下来输入你使用 docker 启动 mysql 输入的密码就好了，如果没有改，就是 `my-secret-pw`，进入之后可以执行任意操作了。
+7. 接下来输入你使用 docker 启动 mysql 输入的密码就好了，如果没有改，就是 `my-secret-pw`，进入之后可以执行任意操作了。
 
