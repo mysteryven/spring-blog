@@ -2,7 +2,7 @@ import {message} from "antd"
 import {AxiosResponse} from "axios"
 
 message.config({
-  duration: 1,
+  duration: 1.5,
 });
 
 export const successNotification = (description: string, msg?: string) => {

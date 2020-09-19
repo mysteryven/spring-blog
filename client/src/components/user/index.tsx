@@ -50,7 +50,7 @@ const User: React.FC<UserProps> = (props) => {
           <Popover placement="bottomLeft" title={username} content={PopContent}>
             <Avatar
               style={{backgroundColor: color, verticalAlign: "middle"}}
-              size={48}
+              size={36}
               shape={"circle"}
               gap={4}
             >

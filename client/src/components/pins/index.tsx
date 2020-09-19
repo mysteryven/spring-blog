@@ -126,8 +126,7 @@ const Pins: React.FC<PinsProps> = (props) => {
   }
 
   function onFinish(values: APin) {
-    patchRequest("/blog", {
-      id: state.pin.id,
+    patchRequest(`/blog/${state.pin.id}`, {
       ...values
     }).then(res => {
       console.log(res)
@@ -155,7 +154,11 @@ const Pins: React.FC<PinsProps> = (props) => {
   return (
     <div className={"pins-wrapper"}>
       <div className={"switch-mode"}>
-        <Switch checkedChildren={"只看我"} unCheckedChildren={"看全部"} onChange={switchMode}/>
+        {
+          props.loginStatus && (
+            <Switch checkedChildren={"只看我"} unCheckedChildren={"看全部"} onChange={switchMode}/>
+          )
+        }
       </div>
       <NewPin/>
       <div className="pins-container">

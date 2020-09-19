@@ -32,12 +32,13 @@ public class BlogService {
         return blogDao.getBlog(ids);
     }
 
-    public void updateBlog(String id, Blog blog) {
+    public void updateBlog(Integer id, Blog blog) {
+        blog.setId(id);
         blogDao.updateBlog(blog);
     }
 
-    public Object getBlogTotal() {
-        return blogDao.getBlogTotal();
+    public Object getBlogTotal(Integer userId) {
+        return blogDao.getBlogTotal(userId);
     }
 
     public void deleteBlog(Integer id) {

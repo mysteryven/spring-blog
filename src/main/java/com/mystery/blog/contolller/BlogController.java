@@ -45,7 +45,7 @@ public class BlogController {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("list", blogService.getBlogs(pageNo, pageSize, userId));
-        map.put("total", blogService.getBlogTotal());
+        map.put("total", blogService.getBlogTotal(userId));
 
         return map;
     }
@@ -55,7 +55,6 @@ public class BlogController {
     @ResponseBody
     public Object newBlog(@RequestBody HashMap<String, String> map) {
         Blog blog = generatorBlog(map, true);
-
 
         blogService.insertBlog(blog);
 
@@ -78,12 +77,14 @@ public class BlogController {
     }
 
     @CrossOrigin("*")
-    @PatchMapping("blog")
+    @PatchMapping("blog/{blogId}")
     @ResponseBody
-    public Object updateBlog(@RequestBody HashMap<String, String> map) {
+    public Object updateBlog(
+            @PathVariable("blogId") Integer blogId,
+            @RequestBody HashMap<String, String> map) {
         Blog blog = generatorBlog(map, false);
 
-        blogService.updateBlog(map.get("id"), blog);
+        blogService.updateBlog(blogId, blog);
 
         return new BlogResult("ok", "修改成功");
     }

@@ -52,8 +52,8 @@ public class BlogDao {
         sqlSession.update("updateBlog", blog);
     }
 
-    public Object getBlogTotal() {
-        return sqlSession.selectOne("selectBlogCount");
+    public Object getBlogTotal(Integer userId) {
+        return sqlSession.selectOne("selectBlogCount", userId);
     }
 
     public void deleteBlog(Integer id) {

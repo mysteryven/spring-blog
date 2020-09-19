@@ -23,6 +23,16 @@ const NewPin = () => {
   }
 
   function onFinish(values: Values) {
+    const url = values.url
+
+    if (!url.startsWith("https://") || !url.startsWith("http://")) {
+      failNotification("正确的链接应该以 http 或者 https 开头")
+      return
+    } else if (url.includes("blog.csdn")) {
+      failNotification("不允许任何垃圾 CSDN 的链接!!!")
+      return
+    }
+
     postRequest(blog, {
       ...values,
       type: 1

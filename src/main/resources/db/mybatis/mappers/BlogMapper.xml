@@ -34,6 +34,7 @@
         SET title       = #{title},
             content     = #{content},
             description = #{description},
+            url         = #{url},
             modified_at = #{modifiedAt}
         where id = #{id}
     </update>
@@ -42,15 +43,19 @@
         FROM blog
         WHERE id = #{id}
     </delete>
-    <select id="selectOneBlog" parameterType="int">
+    <select id="selectOneBlog" parameterType="int" resultType="com.mystery.blog.entity.Blog">
         SELECT *
         FROM blog
-        join user on user_id = user.id
-        WHERE user_id = #{userId} and blog.id = #{id}
+                 join user on user_id = user.id
+        WHERE user_id = #{userId}
+          and blog.id = #{id}
     </select>
-    <select id="selectBlogCount" resultType="int">
+    <select id="selectBlogCount" resultType="int" parameterType="int">
         SELECT count(*)
         FROM blog
+        <if test="userId != null">
+            WHERE user_id = #{userId}
+        </if>
     </select>
     <resultMap id="blog" type="com.mystery.blog.entity.Blog">
         <id property="id" column="blog_id"/>
