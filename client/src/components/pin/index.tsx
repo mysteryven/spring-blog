@@ -1,17 +1,21 @@
-import React from "react"
+import React, {useState} from "react"
 import "./index.less"
 import {APin} from "../pins"
-import {Button, Popconfirm} from "antd"
+import {Button, Form, Input, Modal, Popconfirm} from "antd"
 import {deleteRequest} from "../../server/request"
 import {failNotification, successNotification} from "../../utils"
+import NewPin from "../new-pin"
+import {layout, tailLayout} from "../login"
 
 interface PinProps {
   pin: APin,
-  mode: "me" | "all"
+  mode: "me" | "all",
+  onEditModalVisible: Function
 }
 
 const Pin: React.FC<PinProps> = (props) => {
   const {title, url, description, user, createdAt, id} = props.pin
+
   const style = {
     fontSize: 20
   }
@@ -47,7 +51,7 @@ const Pin: React.FC<PinProps> = (props) => {
   }
 
   function handleEdit() {
-
+    props.onEditModalVisible(id);
   }
 
   return (
@@ -84,6 +88,7 @@ const Pin: React.FC<PinProps> = (props) => {
       {/*    <span className={'num'}>(12)</span>*/}
       {/*  </div>*/}
       {/*</div>*/}
+
     </div>
   )
 }

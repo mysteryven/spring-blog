@@ -32,10 +32,15 @@ public class BlogController {
     public Object blog(
             @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
-            @RequestParam(value = "userId", required = false) Integer userId
+            @RequestParam(value = "userId", required = false) Integer userId,
+            @RequestParam(value = "onlyMine", required = false) boolean onlyMine
     ) {
         if (pageNo < 0) {
             pageNo = 1;
+        }
+
+        if (onlyMine) {
+            userId = userService.getCurrentUser().getId();
         }
 
         HashMap<String, Object> map = new HashMap<>();
