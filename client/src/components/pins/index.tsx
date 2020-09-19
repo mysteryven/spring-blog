@@ -155,8 +155,7 @@ const Pins: React.FC<PinsProps> = (props) => {
   return (
     <div className={"pins-wrapper"}>
       <div className={"switch-mode"}>
-        <Switch onChange={switchMode}/>
-        <span>只看我的</span>
+        <Switch checkedChildren={"只看我"} unCheckedChildren={"看全部"} onChange={switchMode}/>
       </div>
       <NewPin/>
       <div className="pins-container">
