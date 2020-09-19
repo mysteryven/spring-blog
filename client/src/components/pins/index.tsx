@@ -132,7 +132,7 @@ const Pins: React.FC<PinsProps> = (props) => {
       console.log(res)
       setVisible(false)
       successNotification("修改成功")
-      getPins(1, state.pageSize);
+      getPins(1, state.pageSize, mode === "me");
     })
   }
 
@@ -149,6 +149,10 @@ const Pins: React.FC<PinsProps> = (props) => {
       description: pin.description,
       url: pin.url
     })
+  }
+
+  function onRefreshList() {
+    getPins(1, state.pageSize, mode === "me");
   }
 
   return (
@@ -168,6 +172,7 @@ const Pins: React.FC<PinsProps> = (props) => {
               <Pin
                 mode={mode}
                 pin={pin}
+                onRefresh={onRefreshList}
                 onEditModalVisible={handleEditModalVisible}
                 key={pin.id}/>
             )

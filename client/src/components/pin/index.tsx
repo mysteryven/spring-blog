@@ -10,7 +10,8 @@ import {layout, tailLayout} from "../login"
 interface PinProps {
   pin: APin,
   mode: "me" | "all",
-  onEditModalVisible: Function
+  onEditModalVisible: Function,
+  onRefresh: Function
 }
 
 const Pin: React.FC<PinProps> = (props) => {
@@ -42,6 +43,7 @@ const Pin: React.FC<PinProps> = (props) => {
     }).then(res => {
       if (res.data.status === 'ok') {
         successNotification("删除成功")
+        props.onRefrsh();
       } else {
         failNotification(res.data.msg)
       }
