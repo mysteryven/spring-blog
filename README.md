@@ -29,7 +29,7 @@ src/main/java/com/mystery/blog/Application.java
 
 ## 上传到服务器
 
-我没有使用自动化部署工具，使用了比较笨的方法。
+没有用自动化部署工具，使用了比较笨的方法。
 
 ps: 下面的服务器默认使用了我的，你可根据自己的需要进行替换。
 
@@ -38,13 +38,11 @@ ps: 下面的服务器默认使用了我的，你可根据自己的需要进行�
 const baseUrl = "http://47.98.241.215:8080"
 ```
 
-1. 更改 spring 连接的 mysql 是你在服务器启动的那个。全局搜 `spring.datasource.url` 就可以找到配置在哪。值得注意的是 `172.16.105.140` 是你的局域网 ip 地址，可以使用 `ifconfig` 查看。
+1. 更改 spring 连接的 mysql w为你在服务器启动的那个。全局搜 `spring.datasource.url` 就可以找到配置在哪。值得注意的是 `172.16.105.140` 是你的局域网 ip 地址，可以使用 `ifconfig` 查看。
 
 ```
 spring.datasource.url=jdbc:mysql://172.16.105.140:3306/news
 ```
-
-
 
 2. 打包前端项目
 
@@ -95,11 +93,13 @@ docker run -p 8080:8080 my-java-app
  docker run --name my-sql -d -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -v /root/mysql:/var/lib/mysql mysql
 ```
 
-6. 当你成功运行了 mysql，如何你想手动修改 mysql 的数据：
+6. 到了这一步，你就可以直接输入你的网址访问了。
+
+7. 当你成功运行了 mysql，如何你想手动修改 mysql 的数据：
 
 ```
  docker exec -it my-sql1 mysql -uroot -p
 ```
 
-7. 接下来输入你使用 docker 启动 mysql 输入的密码就好了，如果没有改，就是 `my-secret-pw`，进入之后可以执行任意操作了。
+8. 接下来输入你使用 docker 启动 mysql 输入的密码就好了，如果没有改，就是 `my-secret-pw`，进入之后可以执行任意操作了。
 
